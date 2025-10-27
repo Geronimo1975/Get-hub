@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>TCG Agency - Django Creative Agency With Custom Dashboard</title>
+   <!-- Meta -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="Bootstrap 4 Template For Software Startups">
+   <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+   <link rel="shortcut icon" href="assets/images/favicon.png">
+   <!-- Google Font -->
+   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+   <!-- FontAwesome JS-->
+   <script defer src="assets/fontawesome/js/all.min.js"></script>
+   <!-- Plugins CSS -->
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+   <link rel="stylesheet" href="assets/plugins/simplelightbox/simple-lightbox.min.css">
+   <!-- Theme CSS -->
+   <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+   <style>
+      .prev-img {
+         border-radius: 10px;
+         border: 5px solid #4365fd;
+      }
+
+      .hljs {
+         display: block !important;
+         overflow-x: auto !important;
+         padding: 0.5em !important;
+         color: #edecec !important;
+         background: #1e1e1e !important;
+         font-size: 16px !important;
+         font-weight: 500;
+      }
+
+      .hljs2 {
+         display: block !important;
+         width: 700px;
+         overflow-x: auto !important;
+         padding: 0.5em !important;
+         color: #edecec !important;
+         background: #1e1e1e !important;
+         font-size: 16px !important;
+         font-weight: 500;
+      }
+
+      .white-code {
+         display: block !important;
+         overflow-x: auto !important;
+         padding: 20px !important;
+         color: #ffffff !important;
+         background: none !important;
+         font-size: 16px !important;
+         font-weight: 500;
+         border: 1px solid rgb(81, 80, 80);
+      }
+
+      a {
+         text-decoration: none !important;
+      }
+
+      blockquote {
+         font-family: Georgia, serif;
+         font-size: 18px;
+         font-style: italic;
+         margin: 0.25em 0;
+         padding: 0.25em 40px;
+         line-height: 1.45;
+         position: relative;
+         color: #383838;
+         background-color: #EDEDED;
+         border-left: 8px solid #28b76b;
+         /* Change color according to your theme */
+      }
+
+      blockquote cite {
+         display: block;
+         text-align: right;
+         color: #888;
+         font-size: 14px;
+         margin-top: 5px;
+      }
+
+      .card {
+         border: none;
+         margin-bottom: 20px;
+         transition: all 0.3s;
+         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .card:hover {
+         transform: translateY(-3px);
+      }
+
+      .card-header {
+         background-color: #f5f5f5;
+         font-family: 'Roboto', sans-serif;
+         border: none;
+         padding: 15px 20px;
+      }
+
+      .mb-0>a {
+         font-weight: 500;
+         color: #333;
+         display: block;
+         text-decoration: none;
+         transition: color 0.3s;
+      }
+
+      .mb-0>a:hover {
+         color: #28b76b;
+         /* or any other color you prefer for hover */
+      }
+
+      .card-body {
+         font-family: 'Poppins', sans-serif;
+         padding: 20px;
+         background-color: #fff;
+         color: #666;
+      }
+
+     .changelog{
+      background-color: whitesmoke;
+      background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNmNWY1ZjUiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2U2ZTZlNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==);
+      background-size: 100%;
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, whitesmoke), color-stop(50%, #e6e6e6));
+      background-image: -webkit-linear-gradient(whitesmoke 50%, #e6e6e6 50%);
+      background-image: linear-gradient(whitesmoke 50%, #e6e6e6 50%);
+      background-size: 38px 38px;
+      border: 1px solid #d4d4d4;
+      display: block;
+      line-height: 19px;
+      margin-bottom: 20px;
+      overflow: visible;
+      overflow-y: hidden;
+      padding: 0 0 0 4px;
+      color: #333333;
+      font: 13px Monaco, "Courier New", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      width: 600px;
+     }
+
+     @media screen and (max-width:400px) {
+      .changelog{
+         width: 280px;
+      }
+      
+     }
+     .docs-content {
+      padding-bottom: 0px !important;
+  }
+   </style>
+</head>
+
+<body class="docs-page">
+   <header class="header fixed-top">
+      <div class="branding docs-branding">
+         <div class="container-fluid position-relative py-2">
+            <div class="docs-logo-wrapper">
+               <button id="docs-sidebar-toggler" class="docs-sidebar-toggler docs-sidebar-visible me-2 d-xl-none"
+                  type="button">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+               </button>
+               <div class="site-logo"><a class="navbar-brand" href="index.html"><span class="logo-text">TCG<span
+                           class="text-alt">AGENCY<sub>v1.5</sub></span></span></a></div>
+            </div>
+            <!--//docs-logo-wrapper-->
+            <div class="docs-top-utilities d-flex justify-content-end align-items-center">
+               <div class="top-search-box d-none d-lg-flex">
+               </div>
+               <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
+                  <li class="list-inline-item"><a href="http://www.facebook.com/thecodegrammer/"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+                  <li class="list-inline-item"><a href="https://www.instagram.com/thecodegrammer/"><i class="fab fa-instagram fa-fw"></i></a></li>
+               </ul>
+               <!--//social-list-->
+               <a href="https://codecanyon.net/item/tcg-agency-django-agency-with-custom-dashboard/48260620"
+                  class="btn btn-primary d-none d-lg-flex">Get TCG AGENCY</a>
+            </div>
+            <!--//docs-top-utilities-->
+         </div>
+         <!--//container-->
+      </div>
+      <!--//branding-->
+   </header>
+   <!--//header-->
+   <div class="docs-wrapper">
+      <div id="docs-sidebar" class="docs-sidebar">
+         <div class="top-search-box d-lg-none p-3">
+            <form class="search-form">
+               <input type="text" placeholder="Search the docs..." name="search" class="form-control search-input">
+               <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+            </form>
+         </div>
+         <nav id="docs-nav" class="docs-nav navbar">
+            <ul class="section-items list-unstyled nav flex-column pb-3">
+               <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
+                        class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i></span>Introduction</a>
+               </li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-1-1">IMPORTANT WARNING</a></li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-1-2">Quick Overview</a></li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-1-3">Features Overview</a></li>
+               <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-2"><span
+                        class="theme-icon-holder me-2"><i class="fas fa-arrow-down"></i></span>Installation</a>
+               </li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-2-1">Local server</a></li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-2-2">cPanel/Cloud Hosting</a></li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-2-3">VPS Server</a></li>
+               <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-3"><span
+                        class="theme-icon-holder me-2"><i class="fas fa-laptop-code"></i></span>Front Website</a></li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-3-1">Pages</a></li>
+
+               <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-4"><span
+                        class="theme-icon-holder me-2"><i class="fa-solid fa-user-gear"></i></span>Admin Dashboard</a>
+               </li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-4-1">Features & Guides</a></li>
+
+               <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-7"><span
+                        class="theme-icon-holder me-2"><i class="fas fa-book-reader"></i></span>Resources and
+                     Credits</a>
+               </li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-7-1">Sources</a></li>
+               <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-8"><span
+                        class="theme-icon-holder me-2"><i class="fas fa-lightbulb"></i></span>FAQs</a>
+               </li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-8-1">All FAQs</a></li>
+               <li class="nav-item section-title mt-3"><a class="nav-link scrollto" href="#section-9"><span
+                        class="theme-icon-holder me-2"><i class="fa-solid fa-circle-info"></i></span>Others</a></li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-9-1">Support</a></li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-9-2">Changelog</a></li>
+               <li class="nav-item"><a class="nav-link scrollto" href="#item-9-3">More Products</a></li>
+            </ul>
+         </nav>
+         <!--//docs-nav-->
+      </div>
+      <!--//docs-sidebar-->
+      <div class="docs-content">
+         <div class="container">
+            <article class="docs-article" id="section-1">
+               <header class="docs-header">
+                  <h1 class="docs-heading">Introduction <span class="docs-time">Last updated: 2023-10-01</span>
+                  </h1>
+                  <section class="docs-intro">
+                     <p>
+                        Thank you so much for your interest on our product. TCG AGENCY is a feature-rich web application developed using Python Django. It's designed to empower users to create and manage stunning websites with ease. From the frontend website's captivating design to the powerful backend admin dashboard, TCG AGENCY offers a wide array of tools and functionalities to cater to various web development and marketing needs.
+                     </p>
+                  </section>
+               </header>
+               <section class="docs-section" id="item-1-1">
+                  <h2 class="section-heading"><b><span class="text-danger">IMPORTANT WARNING:</span></b> Python & Django Knowledge is an absolute prerequisite</h2>
+                  <p>Before proceeding, please be aware of the following:</p>
+                  <ul>
+                     <li>This system is built on the Django framework, which utilizes the Python programming
+                        language.
+                     </li>
+                     <li>Basic understanding of Python is crucial for successful installation, customization, and
+                        troubleshooting.
+                     </li>
+                     <li>Customization and advanced configuration may necessitate Python programming skills.</li>
+                     <li>If you lack familiarity with Python, consider consulting a Python developer or learning
+                        resources.
+                     </li>
+                     <li>Insufficient Python knowledge may hinder implementation and use of TCG AGENCY.</li>
+                  </ul>
+                  <p>By heeding this warning and having a solid Python foundation, you'll ensure a smoother
+                     experience with TCG AGENCY.
+                  </p>
+                  <p><b class="text-danger">Note:</b> After installing the application the website will be show blank. This is not a defect. You have to login to the
+                     admin dashboard and add the contents. You will get details instructions that how to install it and login to the dashboard bellow.</p>
+               </section>
+               <!--//section-->
+               <section class="docs-section" id="item-1-2">
+                  <h2>Quick Overview</h2>
+                  <p>This quick start guide provides an overview of the key steps included in this documentation.
+                  </p>
+                  <h3>1. Installation</h3>
+                  <ul>
+                     <li>Ensure Python is installed on your system.</li>
+                     <li>Download the TCG AGENCY package from the provided source.</li>
+                     <li>Extract the package and follow the installation instructions below.</li>
+                  </ul>
+                  <h3>2. Frontend Website:</h3>
+                  <ul>
+                      <li>Beautiful Design</li>
+                      <li>Essential Pages</li>
+                      <li>Responsive</li>
+                      <li>Rich Elements</li>
+                  </ul>
+              
+                  <h3>3. Admin Dashboard:</h3>
+                  <ul>
+                      <li>Sleek Design</li>
+                      <li>Light & Dark Mode</li>
+                      <li>Authentication</li>
+                      <li>Content Management</li>
+                  </ul>
+              
+                  <h3>4. Marketing Tools:</h3>
+                  <ul>
+                      <li>Email Marketing</li>
+                      <li>SMS Marketing</li>
+                      <li>Subscriber Management</li>
+                  </ul>
+                  <h2>Conclusion</h2>
+                  <p> TCG AGENCY combines a stunning frontend with a powerful admin dashboard to provide a comprehensive solution for creative agencies, developers, and businesses. With its user-friendly features, customization options, and marketing tools, it's your go-to platform for creating, managing, and promoting your online presence.
+                  </p>
+                  <p class="alert alert-info">If you have any questions that are beyond the scope of this help
+                     file, Please feel free to email via <a target="_blank"
+                        href="https://codecanyon.net/user/thecodegrammer">Item Support Page</a>.
+                  </p>
+               </section>
+               <!--//section-->
+               <section class="docs-section" id="item-1-3">
+                  <h2 class="section-heading">Features Overview Of TCG AGENCY</h2>
+                  <p><b>TCG AGENCY - Django Creative Agency With Custom Dashboard</b> offers a stunning frontend with a powerful admin dashboard to provide a comprehensive solution for creative agencies, developers, and businesses. With its user-friendly features, customization options, and marketing tools, it's your go-to platform for creating, managing, and promoting your online presence.
+                  </p>
+                  <h3>Key Features</h3>
+                  <h4>1. Frontend Website Features:</h4>
+                  <ul style="list-style-type: lower-alpha;">
+                      <li><strong>Beautiful Design:</strong> TCG AGENCY boasts a captivating and user-friendly website design to make a lasting impression on your visitors.</li>
+                      <li><strong>Essential Pages:</strong> The frontend includes vital pages like Home, About Us, Services, Projects, Pricing, Blogs, and Contact Us for a complete online presence.</li>
+                      <li><strong>Responsive Design:</strong> Your website will look and perform flawlessly on all devices, ensuring a seamless user experience.</li>
+                      <li><strong>Rich Elements:</strong> Incorporate essential elements such as Headers, Footers, Sliders, Testimonials, detailed Service and Project page, Terms & conditions page, Privacy policy pages to engage your audience effectively.</li>
+                      <li><strong>Dynamic Sitemap:</strong> TCG AGENCY generates a dynamic sitemap, enhancing SEO and helping search engines discover your content.</li>
+                      <li><strong>Custom Error Pages:</strong> Customize your 404 and 500 error pages to provide a user-friendly experience even when things go wrong.</li>
+                      <li><strong>Engaging Animations:</strong> Add eye-catching animations to captivate your audience and enhance the overall user experience.</li>
+                  </ul>
+              
+                  <h4>2. Custom Admin Dashboard Features:</h4>
+                  <ul style="list-style-type: lower-alpha;">
+                      <li><strong>Sleek Dashboard:</strong> The admin dashboard offers a sleek and responsive design, making it easy to manage your website.</li>
+                      <li><strong>Light Mode and Dark Mode:</strong> Choose between light and dark modes for a comfortable working environment.</li>
+                      <li><strong>Authentication:</strong> Robust authentication and password management features keep your website secure.</li>
+                      <li><strong>Content Management:</strong> Easily manage website content, including pages, blogs, projects, and services, with an intuitive interface.</li>
+                      <li><strong>Page Creation:</strong>Create custom page to add more information in your system. It will help you to create page with title and content.</li>
+                      <li><strong>Element Management:</strong> Effortlessly handle website elements like Sliders, Fun Facts, Clients, and Team Members to keep your content fresh and engaging.</li>
+                      <li><strong>User Management:</strong> Define user roles (Admin and Editor), granting access based on responsibilities.</li>
+                      <li><strong>Form Management:</strong> Handle form submissions, including Subscription and Contact forms, with ease.</li>
+                      <li><strong>Menu Customization:</strong> Customize menus and submenus to create a tailored navigation experience.</li>
+                      <li><strong>Settings Customization:</strong> Fine-tune your website's settings, including General, Header/Footer, and SEO settings.</li>
+                      <li><strong>SEO Tools:</strong> Improve your website's visibility with built-in SEO tools, including meta tags, descriptions, and keywords.</li>
+                      <li><strong>Marketing Tools:</strong> Utilize TCG AGENCY's email & sms marketing tools for bulk email and sms campaigns, subscriber management, and email & number formatting.</li>
+                  </ul>
+              
+                  <h4>3. Marketing Tools:</h4>
+                  <ul style="list-style-type: lower-alpha;">
+                      <li>Email & SMS marketing tools for bulk email & sms campaigns.</li>
+                      <li>Email & Number formatting tool for easy email address & number management.</li>
+                  </ul>
+                 
+                  <p class="alert alert-info"><b>TCG AGENCY</b> has many more features we will explore them bellow
+                     step by step.
+                  </p>
+               </section>
+               <!--//section-->
+            </article>
+            <article class="docs-article" id="section-2">
+               <header class="docs-header">
+                  <h1 class="docs-heading">Installation</h1>
+                  <section class="docs-intro">
+                     <p>In this section we will learn that how to install <b>TCG AGENCY</b> in different platforms
+                     </p>
+                  </section>
+                  <!--//docs-intro-->
+               </header>
+               <section class="docs-section" id="item-2-1">
+                  <h1 class="section-heading">Local Server/Machine</h1>
+                  <h3>Common Steps (for all OS):</h3>
+                  <ol>
+                     <li>
+                        <strong>Download and Unzip:</strong> Download "TCG AGENCY" from Codecanyone and unzip it to
+                        your desired directory.
+                     </li>
+                     <li>
+                        <strong>Install Python:</strong> If you haven’t installed Python yet, download and
+                        install it from <a href="https://www.python.org/">python.org</a>.
+                     </li>
+                     <li>
+                        <strong>Install Virtual Environment:</strong> Install virtual env by this commands
+                        <ul>
+                           <li><strong>Windows:</strong> 
+<pre><code class="hljs">pip install virtualenv</code></pre>
+</li>
+                           <li><strong>macOS and Linux:</strong> 
+<pre><code class="hljs">sudo apt install python3-virtualenv</code></pre>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <strong>Virtual Environment:</strong> Navigate to the project directory and set up a
+                        virtual environment:
+                        <ul>
+                           <li>
+<pre><code class="hljs">virtualenv venv</code></li></pre>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <strong>Activate Virtual Environment:</strong>
+                        <ul>
+                           <li><strong>Windows:</strong> 
+<pre><code class="hljs">venv\Scripts\activate</code></pre>
+                           </li>
+                           <li><strong>macOS and Linux:</strong> 
+<pre><code class="hljs">source venv/bin/activate</code></pre>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <strong>Install Dependencies:</strong> Install required packages using the provided
+                        requirements file (typically <code>requirements.txt</code>):
+<pre><code class="hljs">pip install -r requirements_local.txt</code></pre>
+                     </li>
+                                 <li>Now go to the <code>~/.env</code> file & make this configurations</li>
+                                 <ul>
+                                    <li>Make the <b>DEBUG=True</b></li>
+                                    <li>Set the <b>TIME_ZONE</b></li>
+                                    <li>Make the <b>MYSQL_DB=False</b> (Not applicable if you want to use MySQL in local server which is not recommended. Than make it True and set the DB_NAME, DB_USER, DB_PASSWORD)</li>
+                                    <li>Make the <b>WHITENOISE_CONFIG=False</b></li>
+                                    <li>Make the <b>MYSQL_DB=False</b></li>
+                                 </ul>
+<pre>
+   <code class="hljs"># Core
+DEBUG=True
+ALLOWED_HOSTS=*
+TIME_ZONE=Asia/Dhaka
+DEMO_MODE=False
+
+# Make the MYSQL_DB=True if you want to use MySQL Database
+MYSQL_DB=False
+
+# Make the WHITENOISE_CONFIG=True for live server
+WHITENOISE_CONFIG=False
+
+# MySQL Setup
+DB_NAME=database_name
+DB_USER=database_username
+DB_PASSWORD=database_user_password
+DB_HOST=localhost
+DB_PORT=3306
+
+# Email Credentials
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=host_username
+EMAIL_HOST_PASSWORD=host_password
+
+# Template Setup
+TEMPLATES_DIRS=templates
+
+# Static Media Setup Path
+MEDIA_ROOT=media
+</code>
+</pre>
+                              </ol>
+                           </li>
+
+                        </ul>
+                     </li>
+                     <li>
+                        <strong>Migrations:</strong> Run the following command to apply migrations:
+                        <ul>
+                           <li><strong>Windows:</strong> 
+<pre><code class="hljs">py manage.py makemigrations</code></pre></li>
+                           <li><strong>macOS and Linux:</strong> 
+<pre><code class="hljs">python3 manage.py makemigrations</code></pre></li>
+                        </ul>
+                     </li>
+                     <li>
+                        <strong>Migrate:</strong> Run the following command to apply migrate:
+                        <ul>
+                           <li><strong>Windows:</strong> 
+<pre><code class="hljs">py manage.py migrate</code></pre>
+                           </li>
+                           <li><strong>macOS and Linux:</strong> 
+<pre><code class="hljs">python3 manage.py migrate</code></pre</li>
+                        </ul>
+                     </li>
+                     <li>
+                        <strong>Create Super User:</strong> Run the following command to create superuser:
+                        <ul>
+                           <li><strong>Windows:</strong> 
+<pre><code class="hljs">py manage.py createsuperuser</code></pre>
+                           </li>
+                           <li><strong>macOS and Linux:</strong> 
+<pre><code class="hljs">python3 manage.py createsuperuser</code></pre></li>
+                           <p>Now create a account by giving username, email and password</p>
+                        </ul>
+                     </li>
+                     <li>
+                        <strong>Start the Local Server:</strong> Run the following command to start the Django
+                        development server:
+                        <ul>
+                           <li><strong>Windows:</strong> 
+<pre><code class="hljs">py manage.py runserver</code></pre>
+                           </li>
+                           <li><strong>macOS and Linux:</strong> 
+<pre><code class="hljs">python3 manage.py runserver</code></pre></li>
+                        </ul>
+                     </li>
+                  </ol>
+                  <h3>OS-Specific Instructions:</h3>
+                  <ol>
+                     <li>
+                        <strong>Windows:</strong>
+                        <ul>
+                           <li>Installing Python: Download the installer from <a
+                                 href="https://www.python.org/downloads/windows/">python.org</a>. Ensure you
+                              check the box that says "Add Python to PATH" during installation.
+                           </li>
+                           <li>MySQL: Download the MySQL installer for Windows from the <a
+                                 href="https://dev.mysql.com/downloads/installer/">official site</a>. Follow
+                              the installation steps.
+                           </li>
+                           <li>
+                              You can use <b>XAMPP</b> for windows. <a
+                                 href="https://www.apachefriends.org/download.html" target="_blank"
+                                 rel="noopener noreferrer">Download</a>
+                           </li>
+                           <li>
+                              Read this <a href="https://www.javatpoint.com/creating-mysql-database-with-xampp"
+                                 target="_blank" rel="noopener noreferrer">documentation</a> of XAMPP if you
+                              don't know how to use it. XAMPP provide MySQL with phpMyAdmin.
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <strong>macOS:</strong>
+                        <ul>
+                           <li>
+                              Installing Python:
+                              <ul>
+                                 <li>It's recommended to use Homebrew for package management on macOS
+<pre><code class="hljs">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+<pre><code class="hljs mt-2">brew install python</code></pre>
+                                 </li>
+                                 <li>
+                                    or download python from <a
+                                       href="https://www.python.org/downloads/macos/">python.org</a>
+                                 </li>
+                              </ul>
+                           </li>
+                           <li>MySQL: Install using Homebrew with the commands
+<pre><code class="hljs">brew install mysql</code></pre>
+                              and start using
+<pre><code class="hljs">brew services start mysql</code></pre>
+                           </li>
+                           <li>
+                              or you can use <b>XAMPP</b> for macOS. <a
+                                 href="https://www.apachefriends.org/download.html" target="_blank"
+                                 rel="noopener noreferrer">Downloads</a>
+                           </li>
+                           <li>
+                              Read this <a href="https://www.javatpoint.com/creating-mysql-database-with-xampp"
+                                 target="_blank" rel="noopener noreferrer">documentation</a> of XAMPP if you
+                              don't know how to use it. XAMPP provide MySQL with phpMyAdmin.
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <strong>Linux (Ubuntu/Debian):</strong>
+                        <ul>
+                           <li>Installing Python:
+<pre><code class="hljs">sudo apt update</code></pre> and then
+<pre><code class="hljs">sudo apt install python3 python3-venv python3-pip</code></pre>
+                           </li>
+                           <li>
+                              or download python from <a href="https://www.python.org/downloads/source/">python.org</a>
+                           </li>
+                           <li>MySQL: Use the commands
+<pre><code class="hljs">sudo apt update</code></pre>
+<pre><code class="hljs">sudo apt install mysql-server</code></pre>
+and then
+<pre><code class="hljs">sudo mysql_secure_installation</code></pre>
+                           </li>
+                           <li>
+                              or you can use <b>XAMPP</b> for Linux. <a
+                                 href="https://www.apachefriends.org/download.html" target="_blank">Download</a>
+                           </li>
+                           <li>
+                              Read this <a href="https://www.javatpoint.com/creating-mysql-database-with-xampp"
+                                 target="_blank" rel="noopener noreferrer">documentation</a> of XAMPP if you
+                              don't know how to use it. XAMPP provide MySQL with phpMyAdmin.
+                           </li>
+                        </ul>
+                     </li>
+                  </ol>
+               </section>
+               <!--//section-->
+               <section class="docs-section" id="item-2-2">
+                  <h2 class="section-heading">Live Server ( cPanel/Cloud Hosting )</h2>
+                  <h4><span class="text-danger"><b>Warning:</b> Python & Django Knowledge is prerequisite.</span></h4>
+                  <br>
+                  <h3>Step 1: Create the MySQL Database</h3>
+                  <span class="text-danger"><b>Warning:</b> If your cPanel does not have GCC enabled you can not proceed
+                     with MySQL. Please tell your hosting provider to enable GCC for a smooth installation</span>
+                  <ol>
+                     <li>
+                        Click MySQL Database Wizard. <br>
+                        <img class="mt-2 img-fluid" src="assets/images/cPanel/mysqlwiz.webp" width="800" alt=""
+                           srcset="">
+                     </li>
+                     <li>
+                        Enter a name for the new database and click <b>Next Step.</b> <br>
+                        <img class="mt-2 img-fluid" src="assets/images/cPanel/image03-Create-a-Database.webp"
+                           width="800" alt="" srcset="">
+                     </li>
+                     <li>
+                        Create a user for this database by entering a username and creating a password. Click
+                        <b>Create User.</b> <br>
+                        <img class="mt-2 img-fluid" src="assets/images/cPanel/image04-Create-Database-Users.webp"
+                           width="800" alt="" srcset="">
+                     </li>
+                     <li>
+                        Click the All Privileges check box or select individual privileges based on your
+                        preferences for the user. Click <b>Next Step</b> to continue. <br>
+                        <img class="mt-2 img-fluid" src="assets/images/cPanel/image05-Add-user-to-the-database.webp"
+                           width="800" alt="" srcset="">
+                     </li>
+                     <li>
+                        Your Databse is created. Keep store your <b>Database Name</b>, <b>Database Username</b>
+                        and <b>Database Password</b>.
+                        We will need it.
+                     </li>
+                  </ol>
+
+                  <h3>Step 2: Create a Python application in cPanel</h3>
+                  <p><b><span class="text-danger">Note:</span></b> Your cPanel must have the support of Python and GCC
+                     to setup this application.
+                     The first step is to create a Python application within cPanel that will host the Django
+                     project. To do this, follow these steps:
+                  </p>
+                  <ol>
+                     <li>
+                        Login to your cPanel
+                     </li>
+                     <li>
+                        Open the Python app tool
+                        <ul>
+                           <li>
+                              If you are using the Jupiter theme, on the Tools page, in the Software section,
+                              click Setup Python App: <br>
+                              <img class="mt-2 img-fluid"
+                                 src="assets/images/cPanel/kb-cpanel-jupiter-software-setup-python-app-icon.png" alt=""
+                                 srcset="">
+                           </li>
+                           <li>
+                              If you are using the Paper Lantern theme, in the SOFTWARE section of the cPanel
+                              home page, click Setup Python App: <br>
+                              <img class="mt-2 img-fluid"
+                                 src="assets/images/cPanel/kb-cpanel-78-software-setup-python-app-icon.png" alt=""
+                                 srcset="">
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        Click <b>CREATE APPLICATION:</b><br>
+                        <img class="mt-2 img-fluid"
+                           src="assets/images/cPanel/kb-cpanel-78-software-python-create-application.png" alt=""
+                           srcset=""><br><br>
+                        <p>The application form appears:</p>
+                        <img class="mt-2 img-fluid" src="assets/images/cPanel/application-create-form.png" alt=""
+                           srcset="">
+                     </li>
+                     <li>
+                        In the Python version list box, select 3.7.16.
+                     </li>
+                     <li>
+                        In the Application root text box, type <b>'YourAppName' <span class="text-danger">eg. crm</span></b>.
+                     </li>
+                     <li>
+                        In the Application URL list box, select the domain. Leave the rest of the URL blank.
+                     </li>
+                     <li>
+                        Leave the <b>Application startup file</b> text box and <b>Application Entry point text
+                           box</b> blank.
+                        <blockquote>
+                           When these text boxes are blank, cPanel automatically creates a passenger_wsgi.py
+                           startup file and default application object for you.
+                        </blockquote>
+                     </li>
+                     <li>
+                        In the top right corner of the page, click CREATE: <br>
+                        <img class="mt-2 img-fluid" src="assets/images/cPanel/create_button.png" alt="" srcset="">
+                        <p class="mt-2">cPanel creates the application and sets up the Python environment.</p>
+                     </li>
+                     <li>
+                        At the top of the page, next to Enter to the virtual environment. To enter to virtual
+                        environment, run the command, copy the command. You will need this information in the
+                        following procedure.
+                        It's look like :
+                        <code class="hljs mt-2 w-100">
+                           source /home/username/virtualenv/YourAppName/3.7/bin/activate && cd /home/username/YourAppName
+                           </code>
+                     </li>
+                     <li>
+                        Now go to the file manager of your cPanel. Locate the <b>'YourAppName'</b> that you set
+                        while creating the application. A folder is created in the root directory of your file
+                        manager on that name. This is your virtual environment.
+                        <ul>
+                           <li>Download the <b>install.zip</b> from codecanyon</li>
+                           <li>Upload it to the folder and unzip it.</li>
+                        </ul>
+                     </li>
+                  </ol>
+                  <h3>Step 3: Configure the Django project</h3>
+                  <p>After you create the Python application & MySQL database in cPanel, you are ready to do the
+                     following tasks at the command line:
+                  </p>
+                  <ul>
+                     <li>Install requirements.</li>
+                     <li>Create and configure the Django project.</li>
+                     <li>Configure Passenger to work with the Django project.</li>
+                     <li><b class="text-danger">Warning:</b> You need GCC enabled in your cPanel otherwise you will face
+                        error while
+                        installing mysqlclient.
+                        Contact you provider if not enabled.
+                     </li>
+                  </ul>
+                  <h2 class="text-danger">Install method 01</h2>
+                  <ol>
+                     <li>
+                        In <code><b>~/YourAppName/.env</b></code> make this configurations:</b>
+                        <ul>
+                           <li>
+                              <ul>
+                                 <li>Make the <b>DEBUG=False</b></li>
+                                 <li>Set the <b>TIME_ZONE=Your_timezone</b></li>
+                                 <li>Make the <b>MYSQL_DB=True</b> if you want to use MySQL database</li>
+                                 <li>Make the <b>POSTGRE_DB=True</b> if you want to use PostgreSQL database</li>
+                                 <li><span class="text-danger"><b>Note:</b></span> You can not use both database at a time. You have to choose one of them and if you use postgres then you will not get the demo data.</li>
+                                 <li>Make the <b>WHITENOISE_CONFIG=True</b></li>
+                                 <li>Set the DB_NAME, DB_USER, DB_PASSWORD of your <b>MySQL or PostgreSQL</b> database </li>
+                                 <li>Don't forget to set the email <b>EMAIL_HOST_USER</b> & <b>EMAIL_HOST_PASSWORD</b>
+                                    to work the emails.</li>
+                                 <li>Set the <b>MEDIA_ROOT</b> as given formet. The username in MEDIA_ROOT is your
+                                    cPanel username. If you are using primary domain then set the MEDIA_ROOT as <b>/home/cpanel_username/public_html/media</b> and if you are using subdomain then set the MEDIA_ROOT as <b>/home/cpanel_username/domain.com/media</b></li>
+                              </ul>
+
+                              <pre>
+<code class="hljs"># Core
+DEBUG=True
+ALLOWED_HOSTS=*
+TIME_ZONE=Asia/Dhaka
+DEMO_MODE=False
+
+# Make the WHITENOISE_CONFIG=True for production server
+WHITENOISE_CONFIG=False
+
+# If you make this POSTGRE_DB or MYSQL_DB to False the system will use DBSQLITE by default
+POSTGRE_DB=False
+MYSQL_DB=True
+
+# Database Setup
+DB_NAME=db_name
+DB_USER=db_username
+DB_PASSWORD=db_password
+DB_HOST=localhost
+# DB_PORT = 3306 for MYSQL || 5432 for Postgres
+DB_PORT=3306
+
+# Email Credentials
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=example@gmail.com
+EMAIL_HOST_PASSWORD=host_password
+
+# Media Setup Path If Using in Another Domain
+MEDIA_ROOT=/home/cpanel_username/domain.com/media
+
+# Media Setup Path If Using in Primary Domain
+MEDIA_ROOT=/home/cpanel_username/public_html/media
+</code>
+</pre>
+                           </li>
+
+                        </ul>
+                     </li>
+                     <li>
+                        <b>Go to the <b>Setup python app</b> in your cPanel & click the <b>pencil icon</b> right side of
+                           your created python app.</b>
+                        <img class="mt-2 img-fluid" src="assets/images/cPanel/12.png" alt="" srcset="">
+                     </li>
+                     <li>
+                        <b>Now scroll a little and you will find add another file. In the blank field add <b
+                              class="text-danger">requirements/live.txt</b> and click add</b>
+                        <img class="mt-2 img-fluid" src="assets/images/cPanel/req.png" alt="" srcset="">
+                     </li>
+                     <li><b>Now select the <b>requirements/live.txt</b> from Run pip install and wait for the success
+                           message.</b></li>
+                     <img class="mt-2 img-fluid" src="assets/images/cPanel/ins.png" alt="" srcset="">
+                     <li><b>When you got the success message now enter the manage.py command in the next field and Run
+                           script and wait for complete the process.<br>
+                           Here is a example of the command </b>
+                           <br>
+                           <br>
+                           <b>For MYSQL</b>
+                        <pre>
+<code class="hljs">home/cpanel_user_name/YourAppName/manage.py deploy</code>
+</pre>
+                           <b>For PostgreSQL</b>
+                           <pre>
+<code class="hljs">home/cpanel_user_name/YourAppName/manage.py psdeploy</code>
+</pre>
+                        <img class="mt-2 img-fluid" src="assets/images/cPanel/15.png" alt="" srcset="">
+                     </li>
+                     <li><b>Congratulations</b> your system is ready now. You can now visit now by your domain.</li>
+                     <li>
+                        Login to your <b>Admin Dashboard</b> <br>
+                        Sign in using the custom login form <br>
+                        <pre><code class="hljs mb-2">https://domain.com/login/</code></pre>
+                        Or, if you want to visit <b>Django Admin</b> <br>
+                        <pre><code class="hljs mb-2">https://domain.com/oldadmin/</code></pre>
+                        <b>Note:</b> Delete the <b>/oldadmin</b> from your
+                        <code><b>~/YourAppName/core/urls.py</b></code> when the application is operational
+                     </li>
+                     <li>Default Username & Password is
+                        <pre>
+<code class="hljs">Username: admin
+Password: 123456
+</code>
+</pre>
+                     </li>
+                  </ol>
+               </section>
+               <!--//section-->
+               <section class="docs-section" id="item-2-3">
+                  <h2></h2>
+                  <h2 class="section-heading">VPS Server</h2>
+                  <h5 class="text-danger"><b>Warning:</b> Setting up TCG AGENCY on a VPS server involves complex
+                     configurations that can impact the security and functionality of your system. It is strongly
+                     recommended to be expert on it or consult with an expert or professional before attempting installation or setup.
+                     Incorrect configurations can lead to data loss, security breaches, and other critical issues.
+                     Proceed with caution and at your own risk.</h5>
+                  
+               </section>
+               <!--//section-->
+            </article>
+            <!--//docs-article-->
+            <article class="docs-article" id="section-3">
+               <header class="docs-header">
+                  <h1 class="docs-heading">Website</h1>
+                  <section class="docs-intro">
+                     <p>In this section we will explore the <b>Website</b>
+
+                     </p>
+                  </section>
+                  <!--//docs-intro-->
+               </header>
+               <section class="docs-section" id="item-3-1">
+                  <h2 class="section-heading">All pages overview</h2>
+                  <p><b class="text-danger">Note:</b> After installing the application the website will be show blank. You have to login in the
+                  admin dashboard and add the contents.</p>
+                  <ol>
+                     <!--Home Page-->
+                     <li>
+                        <h4>Home Page:</h4>
+                        <a class="btn btn-danger mt-3" href="https://agency.thecodegrammer.com/" target="_blank">
+                           <i class="fa-solid fa-eye"></i> Live Preview
+                        </a>
+                        <p class="mt-3 text-secondary"><b>Home Page Sections:</b> The home page is composed of vital
+                           sections, each playing a specific role. The <b>header</b> features logo, navigation, and a
+                           prominent action button. The <b>about</b> section introduces company, while <b>services</b>
+                           showcase what company offer. Recent <b>projects</b> are highlighted, and fun <b>facts</b>
+                           engage curiosity. <b></b>Testimonials</b> build trust, and the <b>blog</b> imparts industry
+                           insights. The <b>footer</b> holds contact info and links, ensuring seamless navigation.</p>
+                        <p class="text-danger"><b>Note: </b>You need to maintain the logo size. You will get logo and
+                           other resource related topics in the <a href="#item-4-2">Logo Settings</a> tab</p>
+                     </li>
+                     <!--//Home Page-->
+                     <!--About Page-->
+                     <li>
+                        <h4>About Page:</h4>
+
+                        <a class="btn btn-danger mt-3" href="https://agency.thecodegrammer.com/about-us" target="_blank">
+                           <i class="fa-solid fa-eye"></i> Live Preview
+                        </a>
+                        <p class="mt-3 text-secondary"><b>About Us Page Sections:</b> Discover story and team on the
+                           About Us page, thoughtfully divided into sections. Explore the intuitive <b>breadcrumb</b>
+                           for navigation, a concise <b>video introduction,</b> meet our diverse <b>team</b>,
+                           <b>testimonials</b> section of the company.
+                        </p>
+                        <!--//About Page-->
+                     </li>
+
+                     <!--Service Page-->
+                     <li>
+                        <h4>Service Page:</h4>
+                        <a class="btn btn-danger mt-3" href="https://agency.thecodegrammer.com/services" target="_blank">
+                           <i class="fa-solid fa-eye"></i> Live Preview
+                        </a>
+                        <p class="mt-3 text-secondary"><b>Service Page Sections:</b> Explore comprehensive services
+                           through focused sections: Service Page Top (Breadcrumb), All service Section and service details page.</p>
+                     </li>
+                     <!--//Service Page-->
+
+                     <!--Project Page-->
+                     <li>
+                        <h4>Project/Protfolio Page:</h4>
+                        <a class="btn btn-danger mt-3" href="https://agency.thecodegrammer.com/projects" target="_blank">
+                           <i class="fa-solid fa-eye"></i> Live Preview
+                        </a>
+
+                        <p class="mt-3 text-secondary"><b>Project Page Sections:</b> Navigate the portfolio effortlessly
+                           with these sections: Project Page Top (Breadcrumb), Project By Categories, and Project
+                           Details Page. Discover diverse projects, explore by categories, and delve into the specifics.
+                        </p>
+                     </li>
+                     <!--//Project Page-->
+
+                     <!--Pricing Page-->
+                     <li>
+                        <h4>Pricing Page:</h4>
+                        <a class="btn btn-danger mt-3" href="https://agency.thecodegrammer.com/pricing" target="_blank">
+                           <i class="fa-solid fa-eye"></i> Live Preview
+                        </a>
+
+                        <p class="mt-3 text-secondary"><b>Pricing Page Sections:</b> Explore the offerings effortlessly
+                           through these sections: Pricing Page Top (Breadcrumb) and Pricing Cards featuring our
+                           innovative Featured Making System. Navigate pricing options seamlessly and experience the
+                           unique approach.</p>
+                     </li>
+                     <!--//Pricing Page-->
+
+                     <!--Blog Page-->
+                     <li>
+                        <h4>Blog Page:</h4>
+                        <a class="btn btn-danger mt-3" href="https://agency.thecodegrammer.com/blogs" target="_blank">
+                           <i class="fa-solid fa-eye"></i> Live Preview
+                        </a>
+
+                        <p class="mt-3 text-secondary"><b>Blog Page Sections:</b> Navigate insightful content
+                           effortlessly with these sections: Blog Page Top (Breadcrumb) and All Blogs presented
+                           individually, category wise blog filter and search by blogs. Explore a wealth of knowledge, one post at a time.</p>
+                     </li>
+                     <!--//Blog Page-->
+
+                     <!--Contact Us Page-->
+                     <li>
+                        <h4>Contact Page:</h4>
+                        <a class="btn btn-danger mt-3" href="https://agency.thecodegrammer.com/contact-us" target="_blank">
+                           <i class="fa-solid fa-eye"></i> Live Preview
+                        </a>
+
+                        <p class="mt-3 text-secondary"><b>Contact Page Sections:</b> Connect effortlessly through these
+                           sections: Contact Page Top with Contact Details Cards and a Contact Form featuring a Google
+                           Map Location. Reach out, share your thoughts, and find location easily.</p>
+                     </li>
+                     <li>
+                        <h4>Terms & Condition Page:</h4>
+                        <p class="mt-3 text-secondary">You can add your custom <b>Terms & Condition</b> from the admin
+                           dashboard. This is crucial things for a business</p>
+                     </li>
+                     <li>
+                        <h4>Privacy Policy Page:</h4>
+                        <p class="mt-3 text-secondary">You can add your custom <b>Privacy Policy</b> from the admin
+                           dashboard. This is crucial things for a maintain the security and ensure users privacy.</p>
+                     </li>
+                  </ol>
+
+               </section>
+               <!--//section-->
+               <!--//section-->
+            </article>
+            <!--//docs-article-->
+            <article class="docs-article" id="section-4">
+               <header class="docs-header">
+                  <h1 class="docs-heading">Admin Dashboard</h1>
+                  <section class="docs-intro">
+                     <p>We'll now learn details about the <b>Admin Dashboard</b> and how to configure the website with
+                        this custom dashboard.
+                     </p>
+                     <p class="text-danger"><b>Note: </b>This dashboard is for setting up the website.
+                     </p>
+                  </section>
+                  <!--//docs-intro-->
+               </header>
+               <section class="docs-section" id="item-4-1">
+                  <h2 class="section-heading">Features & Guides</h2>
+                  <ol>
+                     <li>
+                        <h4>Authentication & Password Reset</h4>
+                        <p class="mt-2"><b class="text-danger">Note: </b>This is a agency website so we didn't created the <b>Sign Up</b> system. Admin can create their account through the installation proccess and then can add editor or other admin from their dashboard.</b></p>
+                     </li>
+                     <!--Dashboard Home Page-->
+                     <li>
+                        <h4>Dashboard Home:</h4>
+                        <!-- Button trigger modal -->
+                        <a class="btn btn-danger mt-3" href="https://agency.thecodegrammer.com/admin" target="_blank">
+                           <i class="fa-solid fa-eye"></i> Live Preview
+                        </a>
+                        <p class="mt-3 text-secondary">Dashboard home is used to monitor
+                           total blogs, team, project, revenue, expense etc and it has also a weather widget.</p>
+                     </li>
+                     <!--//Dashboard home Page-->
+                     <li>
+                        <h4>Pages:</h4>
+                        <p><b class="text-danger">Note:</b> After installing the application the website will be show blank. You have to add contents to the page from here.</p>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Pages Menu: </span></b>You can edit
+                           your website pages and add content to them via navigate this menu. Click on each page you
+                           will get the option and navigation to add content to the page</p>
+                     </li>
+                     <li>
+                        <h4>Custom Pages:</h4>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Custom Pages Menu: </span></b>You create, update & delete custom page with title and page content from this menu.</p>
+                     </li>
+                     <li>
+                        <h4>Blogs:</h4>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Blogs Menu: </span></b>After the
+                           pages You can add, edit, delete your website blogs & blog categories from this menu.</p>
+                     </li>
+                     <li>
+                        <h4>Project:</h4>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Project Menu: </span></b>After the
+                           blogs You can add, edit, delete your website projects & project categories that are showing
+                           on the website from this menu.</p>
+                     </li>
+                     <li>
+                        <h4>Service:</h4>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Service Menu: </span></b>After the
+                           project You can add, edit, delete your website services that are showing on the
+                           website from this menu.</p>
+                     </li>
+                     <li>
+                        <h4>Elements:</h4>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Elements Menu: </span></b>This is an
+                           imporant part of the dashboard. From this elemente menu you can create, edit, delete your
+                           website's slider, testimonials, funfacts, teams, clients, pricings</p>
+                     </li>
+                     <li>
+                        <h4>Users:</h4>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Users Menu: </span></b>You can
+                           create, edit, delete users of your website with <span class="text-danger">Admin & Editor</span> roles</p>
+                     </li>
+                     <li>
+                        <h4>Form Data: </h4>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Form Data Menu: </span></b>In this
+                           menu of Form Data you can check the contact form submissions and subscribers mail and delete the data. </p>
+                     </li>
+                     <li>
+                        <h4>Menus:</h4>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Menus: </span></b>You can
+                           create, edit, delete custom primary and submenus from here.</p>
+                     </li>
+                     <li>
+                        <h4>Settings:</h4>
+                        <ul>
+                           <li>
+                              <p class="mt-3 text-secondary"><b><span class="text-danger">Website Settings:
+                                    </span></b>You can edit your website name, logo, favicon, contact details, Facebook pixel & chat code, turn on and off Messenger chat button and Whatsapp
+                                 chat button and can control various settings of the website from here.</p>
+                              <ul>
+                                 <li><b>Logo Size: </b> 356(width)x80(height) pixel <b>(Recommended)</b></li>
+                                 <li><b>Favicon Size: </b> 500(width)x500(height) pixel<b>(Recommended)</b></li>
+                              </ul>
+                           </li>
+                           <li>
+                              <p class="mt-3 text-secondary"><b><span class="text-danger">Template Settings: </span></b>You
+                                 can select multiple templates from this menu.</p>
+                           </li>
+                           <li>
+                              <p class="mt-3 text-secondary"><b><span class="text-danger">Header Footer: </span></b>You
+                                 can edit your website's header footer content like your header's action button text and
+                                 url. You footer's content etc from here.</p>
+                           </li>
+                           <li>
+                              <p class="mt-3 text-secondary"><b><span class="text-danger">SEO: </span></b>You can add
+                                 SEO meta data from here of your website for better ranking result</p>
+                           </li>
+                        </ul>
+                     </li>
+                     <li>
+                        <h4>Marketing Tools: </h4>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Marketing Tools Menu: </span></b>From here you can do email marketing
+                        to the subscribers or non-subscribers. You will also get a email formator tool to format your unserialized emails. </p>
+                     </li>
+                     <li>
+                        <h4>Site Map: </h4>
+                        <p class="mt-3 text-secondary"><b><span class="text-danger">Site Map Menu: </span></b>Your website dynamic sitemap will track every url of your front website and 
+                        automatically add updated blogs, project, service, pages to the sitemap. You can use your site map to better ranking on search result. Access your sitemap by:
+                     <code class="hljs">https://yourdomain.com/sitemap.xml</code></p>
+                     </li>
+
+                  </ol>
+               </section>
+            </article>
+            <!--//docs-article-->
+            <article class="docs-article" id="section-7">
+               <header class="docs-header">
+                  <h1 class="docs-heading">Resources and Credits</h1>
+                  <section class="docs-intro">
+                     <p>This are the resource credits that we used in <b>TCG AGENCY</b>
+                     </p>
+                  </section>
+                  <!--//docs-intro-->
+               </header>
+               <section class="docs-section" id="item-7-1">
+                  <h2 class="section-heading">Sources</h2>
+                  <h4>Images:</h4>
+                  <ul>
+                     <li>Unsplash - <a target="_blank" href="https://unsplash.com/">https://unsplash.com/</a></li>
+                  </ul>
+                  <h4>Fonts:</h4>
+                  <ul>
+                     <li>Fontawesome - <a target="_blank" href="https://fontawesome.com/">https://fontawesome.com/</a>
+                     </li>
+                     <li>Ico Font - <a target="_blank" href="https://icofont.com/">https://icofont.com/</a></li>
+                     <li>Box Icon - <a target="_blank" href="https://boxicons.com/">https://boxicons.com/</a></li>
+                  </ul>
+                  <h4>Scripts:</h4>
+                  <ul>
+                     <li>jQuery - <a target="_blank" href="http://www.jquery.com/">http://www.jquery.com/</a></li>
+                     <li>Bootstrap - <a target="_blank" href="http://getbootstrap.com/">http://getbootstrap.com/</a>
+                     </li>
+                  </ul>
+               </section>
+               <!--//section-->
+            </article>
+            <!--//docs-article-->
+            <article class="docs-article" id="section-8">
+               <header class="docs-header">
+                  <h1 class="docs-heading">FAQs</h1>
+                  <section class="docs-intro">
+                     <p>Here is some frequently asked questions about <b>TCG AGENCY</b>
+                     </p>
+                  </section>
+                  <!--//docs-intro-->
+               </header>
+               <section class="docs-section" id="item-8-1">
+                  <h2 class="section-heading">ALL FAQs</h2>
+                  <div class="row">
+                     <div class="col-lg-12">
+                        <div class="accordion accordion-alterate arrow-right" id="popularTopics">
+                           <div class="card">
+                              <div class="card-header" id="heading1">
+                                 <h5 class="mb-0"> <a href="#" class="collapsed" data-bs-toggle="collapse"
+                                       data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">What is TCG AGENCY?</a> </h5>
+                              </div>
+                              <div id="collapse1" class="collapse" aria-labelledby="heading1"
+                                 data-parent="#popularTopics">
+                                 <div class="card-body">TCG AGENCY is a comprehensive web application designed for creative agencies, developers, and businesses. It combines a stunning frontend website with a powerful admin dashboard and marketing tools.</div>
+                              </div>
+                           </div>
+                           <div class="card mt-3">
+                              <div class="card-header" id="heading2">
+                                 <h5 class="mb-0"> <a href="#" class="collapsed" data-bs-toggle="collapse"
+                                       data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Is the website responsive for all devices?</a> </h5>
+                              </div>
+                              <div id="collapse2" class="collapse" aria-labelledby="heading2"
+                                 data-parent="#popularTopics">
+                                 <div class="card-body">Absolutely, TCG AGENCY ensures your website looks and functions perfectly on all devices. </div>
+                              </div>
+                           </div>
+                           <div class="card mt-3">
+                              <div class="card-header" id="heading3">
+                                 <h5 class="mb-0"> <a href="#" class="collapsed" data-bs-toggle="collapse"
+                                       data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">What can I manage from the admin dashboard?</a> </h5>
+                              </div>
+                              <div id="collapse3" class="collapse" aria-labelledby="heading3"
+                                 data-parent="#popularTopics">
+                                 <div class="card-body"> You can manage website content, user roles, forms, menus, settings, and more from the admin dashboard.</div>
+                              </div>
+                           </div>
+                           <div class="card mt-3">
+                              <div class="card-header" id="heading4">
+                                 <h5 class="mb-0"> <a href="#" class="collapsed" data-bs-toggle="collapse"
+                                       data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">Can I conduct email marketing campaigns?</a> </h5>
+                              </div>
+                              <div id="collapse4" class="collapse" aria-labelledby="heading4"
+                                 data-parent="#popularTopics">
+                                 <div class="card-body">Yes, TCG AGENCY provides email marketing tools for sending bulk emails to subscribers and non-subscribers. </div>
+                              </div>
+                           </div>
+                           <div class="card mt-3">
+                              <div class="card-header" id="heading5">
+                                 <h5 class="mb-0"> <a href="#" class="collapsed" data-bs-toggle="collapse"
+                                       data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">Is subscriber management included?</a> </h5>
+                              </div>
+                              <div id="collapse5" class="collapse" aria-labelledby="heading5"
+                                 data-parent="#popularTopics">
+                                 <div class="card-body"> Absolutely, you can manage subscribers and select specific recipients for email campaigns.
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="card mt-3">
+                              <div class="card-header" id="heading6">
+                                 <h5 class="mb-0"> <a href="#" class="collapsed" data-bs-toggle="collapse"
+                                       data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">How
+                                       does the Portfolio Showcase work?</a> </h5>
+                              </div>
+                              <div id="collapse6" class="collapse" aria-labelledby="heading6"
+                                 data-parent="#popularTopics">
+                                 <div class="card-body">The Portfolio Showcase allows you to display your projects and
+                                    work in an organized manner. You can upload images, descriptions, and details to
+                                    showcase your services and capabilities.</div>
+                              </div>
+                           </div>
+                           <div class="card mt-3">
+                              <div class="card-header" id="heading5">
+                                 <h5 class="mb-0"> <a href="#" class="collapsed" data-bs-toggle="collapse"
+                                       data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">How
+                                       do potential clients get in touch with me?</a> </h5>
+                              </div>
+                              <div id="collapse7" class="collapse" aria-labelledby="heading5"
+                                 data-parent="#popularTopics">
+                                 <div class="card-body"> We offer a Contact Form through which potential clients can
+                                    directly reach out to you. The form collects their information and messages, making
+                                    it easier to establish new business relationships.</div>
+                              </div>
+                           </div>
+                           <div class="card mt-3">
+                              <div class="card-header" id="heading5">
+                                 <h5 class="mb-0"> <a href="#" class="collapsed" data-bs-toggle="collapse"
+                                       data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">Is there customer support available for TCG AGENCY?</a> </h5>
+                              </div>
+                              <div id="collapse8" class="collapse" aria-labelledby="heading5"
+                                 data-parent="#popularTopics">
+                                 <div class="card-body"> Yes, we offer customer support to assist you with any questions or issues you may encounter while using TCG AGENCY.</div>
+                              </div>
+                           </div>
+                           <div class="card mt-3">
+                              <div class="card-header" id="heading5">
+                                 <h5 class="mb-0"> <a href="#" class="collapsed" data-bs-toggle="collapse"
+                                       data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">Is there a limit to the number of users I can manage in the dashboard?</a> </h5>
+                              </div>
+                              <div id="collapse9" class="collapse" aria-labelledby="heading5"
+                                 data-parent="#popularTopics">
+                                 <div class="card-body"> TCG AGENCY allows you to manage an unlimited number of users based on their roles.</div>
+                              </div>
+                           </div>
+                           <div class="card mt-3">
+                              <div class="card-header" id="heading5">
+                                 <h5 class="mb-0"> <a href="#" class="collapsed" data-bs-toggle="collapse"
+                                       data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapse10">What technology stack is TCG AGENCY built on?</a> </h5>
+                              </div>
+                              <div id="collapse10" class="collapse" aria-labelledby="heading5"
+                                 data-parent="#popularTopics">
+                                 <div class="card-body"> TCG AGENCY is built using Python Django, a powerful web framework known for its scalability and security.</div>
+                              </div>
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+               </section>
+               <!--//section-->
+            </article>
+            <!--//docs-article-->
+            <article class="docs-article" id="section-9">
+               <header class="docs-header">
+                  <h1 class="docs-heading">Others</h1>
+                  <section class="docs-intro">
+                     <p>This section is for the Support, Changelog and More Products</p>
+                  </section>
+                  <!--//docs-intro-->
+               </header>
+               <section class="docs-section" id="item-9-1">
+                  <h2 class="section-heading">Support</h2>
+                  <p class="text-danger"><b>Whether this is a initial release of TCG AGENCY if you find anything trouble immediately let us know via support. We will try to fix your problem as soon as possible.</b></p>
+                  <p>If this documentation doesn't answer your questions, So, Please send us Email via <a
+                        class="btn btn-primary" target="_blank" href="https://codecanyon.net/user/thecodegrammer">Item
+                        Support Page</a></p>
+                  <p> We are located in GMT+6:00 time zone (Bangladesh Standard Time, BST) and we answer all questions
+                     within 12-24 hours on weekdays. In some rare cases, the waiting time can be up to 48 hours. Please
+                     note that during holiday seasons, response times might take longer.</p>
+                  <div class="alert alert-warning mb-4"><span class="badge badge-danger bg-danger text-uppercase">Note:</span>
+                     While we aim to provide the best support possible, please keep in mind that it only extends to
+                     verified buyers and only to issues related to our template like bugs and errors. Custom
+                     modifications or third party module implementations are not included.</div>
+                  <h4>Don’t forget to Rate <b>TCG AGENCY</b>
+                     <i class="fas fa-star text-warning"></i> <i class="fas fa-star text-warning"></i> <i
+                        class="fas fa-star text-warning"></i> <i class="fas fa-star text-warning"></i> <i
+                        class="fas fa-star text-warning"></i>
+                  </h4>
+                  <div class="alert alert-success">
+                     Please Add your Review (Opinion) for Our application. It would be a great support for us.<br>
+                     Go to your <strong>Codecanyon Profile</strong> > <strong>Downloads Tab</strong> > & then You can
+                     Rate & Review for our application.<br>
+                     Thank You.
+                  </div>
+               </section>
+               <!--//section-->
+               <section class="docs-section" id="item-9-2">
+                  <h2 class="section-heading">Changelog</h2>
+                  <p class="alert alert-info mb-5"> For Future Updates Follow Us <a target="_blank" href="https://codecanyon.net/user/thecodegrammer">@codecanyon</a> / <a target="_blank" href="http://facebook.com/thecodegrammer">@facebook</a>
+
+<pre class="changelog"> v1.5 (24 Jun, 2025)
+   [Added]    -  New Light Weight Admin
+   [Added]    -  Multiple Color Changing Option
+   [Added]    -  Website Section Title Changing From Admin
+   [Added]    -  PostgreSQL Database Support
+   [Updated]  -  Speed Optimization 
+   [Fixed]    -  Form Saving Errors
+   [Fixed]    -  Assets Loading Issues
+</pre>
+
+<pre class="changelog"> v1.4 (2 Apr, 2023)
+    [Added]    -  Multiple Template
+    [Added]    -  Visitor Analytics
+    [Updated]  -  Speed Optimization
+    [Fixed]    -  Runtime errors
+    [Fixed]    -  Email Sending Errors
+</pre>
+
+<pre class="changelog"> v1.3 (30 Oct, 2023)
+    [Added]    -  SMS Marketing
+    [Added]    -  Custom page Creation
+    [Added]    -  Project pagination
+    [Added]    -  More customization flexibility
+    [Updated]  -  Installation step
+    [Updated]  -  SEO functionalities
+    [Updated]  -  Forece full content addition removed
+    [Fixed]    -  Footer service and project link issue
+    [Fixed]    -  Spelling corrections
+    [Fixed]    -  Runtime errors
+</pre>
+<pre class="changelog"> v1.2 (16 Oct, 2023)
+    [Updated]  -  Optimization increased
+    [Fixed]    -  Meta information issues
+    [Fixed]    -  Spelling corrections
+    [Fixed]    -  Installation bugs
+    [Fixed]    -  Authentication issues
+</pre>
+<pre class="changelog"> v1.1 (1 Oct, 2023)
+   [Updated] - Preloader removed
+   [Fixed]   - Category wise blog read
+   [Fixed]   - Authentication minor issues
+   [Fixed]   - Html CSS issues
+</pre>
+<pre class="changelog"> v1.0 (23 Sep, 2023)
+   - Initial Release</pre>
+                        
+               <!--//section-->
+                 <section class="docs-section" id="item-9-3">
+                  <h2 class="section-heading">More Products</h2>
+                  <div class="row">
+                     <div class="col-md-4">
+                        <div class="card">
+                            <a href="https://codecanyon.net/item/tcg-crm-django-crm-with-agency-website/47751542" target="_blank">
+                              <img src="https://market-resized.envatousercontent.com/codecanyon.net/files/530619994/TCG%20CRM.png?auto=format&q=94&cf_fit=crop&gravity=top&h=8000&w=590&s=e8746bb7cd53ee4fcf43e78ecbac74343b8034a8389ce2ad82e17500194e8efb" class="card-img-top" alt="TCG CRM"></a>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title">TCG CRM</h5>
+                                    <p class="card-price text-danger"><b>$49</b></p> 
+                                </div>
+                                <p class="card-text">Django CRM With Agency Website</p>
+                                <a href="https://codecanyon.net/item/tcg-crm-django-crm-with-agency-website/47751542" target="_blank" class="btn btn-sm btn-primary w-100">View on Codecanyon</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                     <div class="card">
+                         <a href="https://codecanyon.net/user/thecodegrammer/portfolio" target="_blank">
+                           <img src="./assets/images/TCGPORTO.png" class="card-img-top" alt="TCG PORTO"></a>
+                         <div class="card-body">
+                             <div class="d-flex justify-content-between align-items-center">
+                                 <h5 class="card-title">TCG PORTO</h5>
+                                 <p class="card-price text-danger"><b>$29</b></p> 
+                             </div>
+                             <p class="card-text">Django Personal Portfolio With Dashboard</p>
+                             <a href="https://codecanyon.net/user/thecodegrammer/portfolio" target="_blank" class="btn btn-sm btn-primary w-100">View on Codecanyon</a>
+                         </div>
+                     </div>
+                 </div>
+                                      
+                  </div>
+                 </section>
+                        
+               <!--//section-->
+            </article>
+            <!--//docs-article-->
+            <footer class="footer">
+               <div class="container text-center py-5">
+                  <small class="copyright">&copy;2023 The CodeGrammer. All Rights Reserved</small>
+                  <br>
+                  <small>Document designed by Xiaoying Riley</small>
+                  <ul class="social-list list-unstyled pt-4 mb-0">
+                     <li class="list-inline-item"><a href="http://www.facebook.com/thecodegrammer/"><i class="fab fa-facebook-f fa-fw"></i></a></li>
+                     <li class="list-inline-item"><a href="https://www.instagram.com/thecodegrammer/"><i class="fab fa-instagram fa-fw"></i></a></li>
+                  </ul>
+                  <!--//social-list-->
+               </div>
+            </footer>
+         </div>
+      </div>
+   </div>
+   <!--//docs-wrapper-->
+   <!-- Javascript -->
+   <script src="assets/plugins/popper.min.js"></script>
+   <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+   <!-- Page Specific JS -->
+   <script src="assets/plugins/smoothscroll.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+   <script src="assets/js/highlight-custom.js"></script>
+   <script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>
+   <script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+   <script src="assets/js/docs.js"></script>
+</body>
+
+</html>
